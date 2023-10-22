@@ -71,10 +71,12 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Successfully logged out']);
     }
+
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
     }
+
     protected function respondWithToken($token)
     {
         return response()->json([
@@ -83,4 +85,10 @@ class AuthController extends Controller
             'expires_in' => auth('api')->factory()->getTTL() * 60 //mention the guard name inside the auth fn
         ]);
     }
+
+    public function users()
+    {
+        return User::all();
+    }
+
 }
